@@ -18,7 +18,7 @@ Your app must:
 - Allow the user to **Add items** to each to-do list
 - Allow the user to **remove items from a to-do list**
 - Allow the user to **remove an entire to-do list**
-- Use two custom Java objects to contain your data for each `ToDoList`, and the `ToDoItem`s in each `ToDoList`
+- Use two custom Java classes to contain your data for each `ToDoList`, and the `ToDoItem`s in each `ToDoList`
 - Show an error message if invalid input is given (e.g. blank input)
 - Persist data (your `ToDoList`s) while the app is open using a **singleton**
 - Use either `ListView` or `RecyclerView` to show your `ToDoList`s and `ToDoItem`s. We recommend `RecyclerView`, but will accept `ListView` for this project.
