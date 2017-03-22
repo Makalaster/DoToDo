@@ -12,6 +12,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.makalaster.todolist.Helpers.MainHelpers.ToDoListRecyclerViewAdapter;
+import com.makalaster.todolist.ToDos.ListBook;
+import com.makalaster.todolist.ToDos.ToDoList;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -19,9 +23,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RecyclerView listRecylcer = (RecyclerView) findViewById(R.id.list_recycler);
+        final RecyclerView listRecylcer = (RecyclerView) findViewById(R.id.list_recycler);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         listRecylcer.setLayoutManager(layoutManager);
+        ToDoListRecyclerViewAdapter adapter = new ToDoListRecyclerViewAdapter(ListBook.getInstance().getLists());
+        listRecylcer.setAdapter(adapter);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -35,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
                 builder.setView(editView);
 
-                EditText newListName = (EditText) editView.findViewById(R.id.new_list_title);
+                final EditText newListName = (EditText) editView.findViewById(R.id.new_list_title);
                 newListName.setError("Please enter a list name");
 
                 builder.setMessage("Enter the list title:").setTitle("Add a new list")
@@ -50,7 +56,8 @@ public class MainActivity extends AppCompatActivity {
                 builder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        ListBook listBook = ListBook.getInstance();
+                        listBook.addList(new ToDoList(newListName.getText().toString()));
                     }
                 });
                 AlertDialog dialog = builder.create();
