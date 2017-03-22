@@ -58,15 +58,19 @@ public class MainActivity extends AppCompatActivity {
                                 toast.show();
                             }
                         });
-                builder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        ListBook listBook = ListBook.getInstance();
-                        listBook.addList(new ToDoList(newListName.getText().toString()));
-                    }
-                });
-                AlertDialog dialog = builder.create();
+
+                final AlertDialog dialog = builder.create();
                 dialog.show();
+
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+                        .setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                ListBook listBook = ListBook.getInstance();
+                                listBook.addList(new ToDoList(newListName.getText().toString()));
+                            dialog.dismiss();
+                            }
+                        });
             }
         });
     }
