@@ -17,19 +17,23 @@ import com.makalaster.todolist.ToDos.ListBook;
 import com.makalaster.todolist.ToDos.ToDoList;
 
 public class MainActivity extends AppCompatActivity {
+    //private static final int NAME_REQUEST = 20;
+    private RecyclerView mListRecycler;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private RecyclerView.Adapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final RecyclerView listRecylcer = (RecyclerView) findViewById(R.id.list_recycler);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        listRecylcer.setLayoutManager(layoutManager);
-        ToDoListRecyclerViewAdapter adapter = new ToDoListRecyclerViewAdapter(ListBook.getInstance().getLists());
-        listRecylcer.setAdapter(adapter);
+        mListRecycler = (RecyclerView) findViewById(R.id.list_recycler);
+        mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        mListRecycler.setLayoutManager(mLayoutManager);
+        mAdapter = new ToDoListRecyclerViewAdapter(ListBook.getInstance().getLists());
+        mListRecycler.setAdapter(mAdapter);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_main);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
                 final EditText newListName = (EditText) editView.findViewById(R.id.new_list_title);
                 newListName.setError("Please enter a list name");
+                newListName.requestFocus();
 
                 builder.setMessage("Enter the list title:").setTitle("Add a new list")
                         .setPositiveButton("Done", null)

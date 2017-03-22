@@ -12,12 +12,13 @@ import com.makalaster.todolist.R;
 
 public class ToDoListHolder extends RecyclerView.ViewHolder {
     public TextView mListName, mItemCount;
-
+    public View mListItem;
 
     public ToDoListHolder(View itemView) {
         super(itemView);
 
         mListName = (TextView) itemView.findViewById(R.id.list_name);
         mItemCount = (TextView) itemView.findViewById(R.id.list_item_count);
+        mListItem = itemView.findViewById(R.id.list_item);
     }
 }

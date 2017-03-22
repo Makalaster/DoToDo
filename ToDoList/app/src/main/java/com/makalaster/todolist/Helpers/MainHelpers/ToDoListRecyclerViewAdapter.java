@@ -1,10 +1,13 @@
 package com.makalaster.todolist.Helpers.MainHelpers;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
+import com.makalaster.todolist.ListActivity;
 import com.makalaster.todolist.R;
 import com.makalaster.todolist.ToDos.ToDoList;
 
@@ -28,10 +31,29 @@ public class ToDoListRecyclerViewAdapter extends RecyclerView.Adapter<ToDoListHo
     }
 
     @Override
-    public void onBindViewHolder(ToDoListHolder holder, int position) {
+    public void onBindViewHolder(final ToDoListHolder holder, int position) {
         holder.mListName.setText(mToDoLists.get(position).getName());
         holder.mItemCount.setText(mToDoLists.get(position).getToDoItems().size() + " Items");
-        //notifyItemChanged(position);
+
+        holder.mListItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent openList = new Intent(v.getContext(), ListActivity.class);
+                openList.putExtra("LIST", holder.getAdapterPosition());
+                v.getContext().startActivity(openList);
+            }
+        });
+
+        holder.mListItem.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                mToDoLists.remove(holder.getAdapterPosition());
+                notifyItemRemoved(holder.getAdapterPosition());
+                return false;
+            }
+        });
+
+
     }
 
     @Override
