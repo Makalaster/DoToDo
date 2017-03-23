@@ -23,9 +23,11 @@ import java.util.ArrayList;
 
 public class ToDoListRecyclerViewAdapter extends RecyclerView.Adapter<ToDoListHolder> {
     private ArrayList<ToDoList> mToDoLists;
+    private OnItemClickListener mOnItemClickListener;
 
-    public ToDoListRecyclerViewAdapter(ArrayList<ToDoList> toDoLists) {
+    public ToDoListRecyclerViewAdapter(ArrayList<ToDoList> toDoLists, OnItemClickListener listener) {
         mToDoLists = toDoLists;
+        mOnItemClickListener = listener;
     }
 
     @Override
@@ -42,9 +44,7 @@ public class ToDoListRecyclerViewAdapter extends RecyclerView.Adapter<ToDoListHo
         holder.mListItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent openList = new Intent(v.getContext(), ListActivity.class);
-                openList.putExtra("LIST", holder.getAdapterPosition());
-                v.getContext().startActivity(openList);
+                mOnItemClickListener.onItemClicked(holder.getAdapterPosition());
             }
         });
 

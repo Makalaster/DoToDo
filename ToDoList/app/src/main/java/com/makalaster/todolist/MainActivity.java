@@ -13,12 +13,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.makalaster.todolist.Helpers.MainHelpers.OnItemClickListener;
 import com.makalaster.todolist.Helpers.MainHelpers.ToDoListRecyclerViewAdapter;
 import com.makalaster.todolist.ToDos.ListBook;
 import com.makalaster.todolist.ToDos.ToDoList;
 
-public class MainActivity extends AppCompatActivity {
-    //private static final int NAME_REQUEST = 20;
+public class MainActivity extends AppCompatActivity implements OnItemClickListener {
+    private static final int NAME_REQUEST = 20;
     private RecyclerView mListRecycler;
     private RecyclerView.LayoutManager mLayoutManager;
     private RecyclerView.Adapter mAdapter;
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         mListRecycler = (RecyclerView) findViewById(R.id.list_recycler);
         mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mListRecycler.setLayoutManager(mLayoutManager);
-        mAdapter = new ToDoListRecyclerViewAdapter(ListBook.getInstance().getLists());
+        mAdapter = new ToDoListRecyclerViewAdapter(ListBook.getInstance().getLists(), this);
         mListRecycler.setAdapter(mAdapter);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_main);
@@ -84,5 +85,12 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    @Override
+    public void onItemClicked(int position) {
+        Intent openList = new Intent(MainActivity.this, ListActivity.class);
+        openList.putExtra("LIST", position);
+        startActivityForResult(openList, 20);
     }
 }
