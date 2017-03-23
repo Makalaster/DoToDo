@@ -33,11 +33,9 @@ public class ItemRecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             case SIMPLE:
                 parentView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_simple, parent, false);
                 return new ItemHolderSimple(parentView);
-                //break;
             case COMPLEX:
                 parentView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_complex, parent, false);
                 return new ItemHolderComplex(parentView);
-                //break;
             default:
                 parentView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_simple, parent, false);
                 return new ItemHolderSimple(parentView);
@@ -45,18 +43,50 @@ public class ItemRecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         switch (holder.getItemViewType()) {
             case SIMPLE:
-                ((ItemHolderSimple)holder).mItemTitle.setText(((SimpleToDoItem)mToDoItems.get(position)).getItemTitle());
+                ItemHolderSimple simpleHolder = (ItemHolderSimple) holder;
+                final SimpleToDoItem simpleItem = ((SimpleToDoItem)mToDoItems.get(position));
+
+                simpleHolder.mCheckBox.setChecked(simpleItem.isChecked());
+                simpleHolder.mItemTitle.setText(simpleItem.getItemTitle());
+
+                simpleHolder.mCheckBox.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        boolean isChecked = simpleItem.isChecked();
+                        simpleItem.setChecked(!isChecked);
+                        notifyItemChanged(holder.getAdapterPosition());
+                    }
+                });
                 break;
             case COMPLEX:
-                ((ItemHolderComplex)holder).mItemTitle.setText(((ComplexToDoItem)mToDoItems.get(position)).getItemTitle());
-                ((ItemHolderComplex)holder).mItemDescription.setText(((ComplexToDoItem)mToDoItems.get(position)).getItemDescription());
+                ItemHolderComplex complexHolder = (ItemHolderComplex) holder;
+                final ComplexToDoItem complexItem = ((ComplexToDoItem)mToDoItems.get(position));
+
+                complexHolder.mCheckBox.setChecked(complexItem.isChecked());
+                complexHolder.mItemTitle.setText(complexItem.getItemTitle());
+                complexHolder.mItemDescription.setText(complexItem.getItemDescription());
+
+                complexHolder.mCheckBox.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        boolean isChecked = complexItem.isChecked();
+                        complexItem.setChecked(!isChecked);
+                        notifyItemChanged(holder.getAdapterPosition());
+                    }
+                });
                 break;
             default:
-                ((ItemHolderSimple)holder).mItemTitle.setText(((SimpleToDoItem)mToDoItems.get(position)).getItemTitle());
+                simpleHolder = (ItemHolderSimple) holder;
+                SimpleToDoItem simpleDefaultItem = ((SimpleToDoItem)mToDoItems.get(position));
+
+                simpleHolder.mCheckBox.setChecked(simpleDefaultItem.isChecked());
+                simpleHolder.mItemTitle.setText(simpleDefaultItem.getItemTitle());
         }
+
+
     }
 
     @Override

@@ -15,6 +15,7 @@ import com.makalaster.todolist.R;
 public class ItemHolderComplex extends RecyclerView.ViewHolder {
     public CheckBox mCheckBox;
     public TextView mItemTitle, mItemDescription;
+    public View mListItemComplex;
 
     public ItemHolderComplex(View itemView) {
         super(itemView);
@@ -22,5 +23,6 @@ public class ItemHolderComplex extends RecyclerView.ViewHolder {
         mCheckBox = (CheckBox) itemView.findViewById(R.id.complex_checkbox);
         mItemTitle = (TextView) itemView.findViewById(R.id.complex_title);
         mItemDescription = (TextView) itemView.findViewById(R.id.complex_description);
+        mListItemComplex = itemView.findViewById(R.id.list_item_complex);
     }
 }

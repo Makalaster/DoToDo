@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import com.makalaster.todolist.ListActivity;
 import com.makalaster.todolist.MainActivity;
 import com.makalaster.todolist.R;
+import com.makalaster.todolist.ToDos.ListBook;
 import com.makalaster.todolist.ToDos.ToDoList;
 
 import java.util.ArrayList;
@@ -53,20 +54,18 @@ public class ToDoListRecyclerViewAdapter extends RecyclerView.Adapter<ToDoListHo
                 AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
                 builder.setTitle("Confirm")
                         .setMessage("Please confirm removal of this item")
-                        .setPositiveButton("Confirm", null)
+                        .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                mToDoLists.remove(holder.getAdapterPosition());
+                                notifyItemRemoved(holder.getAdapterPosition());
+                                dialog.dismiss();
+                            }
+                        })
                         .setNegativeButton("Cancel", null);
 
-                final AlertDialog dialog = builder.create();
+                AlertDialog dialog = builder.create();
                 dialog.show();
-
-                builder.setPositiveButton("Confim", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        mToDoLists.remove(holder.getAdapterPosition());
-                        notifyItemRemoved(holder.getAdapterPosition());
-                        dialog.dismiss();
-                    }
-                });
 
                 return true;
             }
