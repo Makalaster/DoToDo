@@ -2,9 +2,7 @@
 
 #### Overview
 
-It's time to create your very first Android project - a to-do list app. This might seem intimidating at first, but you have the ability to break down what you see on the screen into easily identifiable parts. Learning to both design an app and implement your designs are crucial skills to being a successful Android developer.
-
-**You will be working individually for this project**. Think through your design carefully before you implement it in Android Studio. Test both the layout and functionality of each screen as you create them. Don't wait until the end!
+The app created for this project is a simple to-do list utility. The user can add and remove lists containing to-do items, which can be added or removed from each list.
 
 ---
 
@@ -32,36 +30,12 @@ Your app must:
 
 ---
 
-#### Code of Conduct
-
-As always, your app must adhere to General Assembly's [student code of conduct guidelines](../../../resources/guidelines/code-of-conduct.md).
-
-If you have questions about whether or not your work adheres to these guidelines, please speak with a member of your instructional team.
-
----
-
 #### Necessary Deliverables
 
 - A **git repository hosted on GitHub**, with frequent commits dating back to the **very beginning** of the project. Commit early, commit often.
 - **A ``readme.md`` file** describing what the app does, and any bugs that may exist
 - At least one screenshot of your home screen in the `readme.md`
 - Pictures of your prototypes in the git repository
-
----
-
-#### Suggested Ways to Get Started
-
-- Complete as much of the layout XML as possible before starting to write your logic
-- Use the Android API documentation - it is very thorough and provides useful code samples
-- Don’t hesitate to write throwaway code to solve short term problems
-- Write pseudocode before you write actual code (remember to think through the logic first!)
-
----
-
-### Useful Resources
-
-- [Android API Reference](http://developer.android.com/reference/packages.html)
-- [Android API Guides](http://developer.android.com/guide/index.html)
 
 ---
 
