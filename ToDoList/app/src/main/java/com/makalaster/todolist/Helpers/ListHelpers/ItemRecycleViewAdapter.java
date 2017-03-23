@@ -1,9 +1,12 @@
 package com.makalaster.todolist.Helpers.ListHelpers;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.makalaster.todolist.Helpers.MainHelpers.ToDoListHolder;
 import com.makalaster.todolist.R;
@@ -46,7 +49,7 @@ public class ItemRecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         switch (holder.getItemViewType()) {
             case SIMPLE:
-                ItemHolderSimple simpleHolder = (ItemHolderSimple) holder;
+                final ItemHolderSimple simpleHolder = (ItemHolderSimple) holder;
                 final SimpleToDoItem simpleItem = ((SimpleToDoItem)mToDoItems.get(position));
 
                 simpleHolder.mCheckBox.setChecked(simpleItem.isChecked());
@@ -60,6 +63,69 @@ public class ItemRecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                         notifyItemChanged(holder.getAdapterPosition());
                     }
                 });
+
+                simpleHolder.mListItemSimple.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        AlertDialog.Builder simpleBuilder = new AlertDialog.Builder(v.getContext());
+
+                        LayoutInflater inflater = LayoutInflater.from(v.getContext());
+                        View simpleEditView = inflater.inflate(R.layout.new_list_dialog, null);
+
+                        simpleBuilder.setView(simpleEditView);
+
+                        final EditText newItemName = (EditText) simpleEditView.findViewById(R.id.new_list_title);
+                        newItemName.setText(simpleHolder.mItemTitle.getText());
+
+                        simpleBuilder.setTitle("Edit item")
+                                .setMessage("Enter a new item title:")
+                                .setPositiveButton("Done", null)
+                                .setNegativeButton("Cancel", null);
+
+                        final AlertDialog simpleDialog = simpleBuilder.create();
+                        simpleDialog.show();
+
+                        simpleDialog.getButton(AlertDialog.BUTTON_POSITIVE)
+                                .setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        if (newItemName.getText().toString().isEmpty()) {
+                                            newItemName.setError("Please enter a new title or press cancel");
+                                            newItemName.requestFocus();
+                                        } else {
+                                            simpleHolder.mItemTitle.setText(newItemName.getText().toString());
+                                            simpleItem.setItemTitle(newItemName.getText().toString());
+                                            notifyItemChanged(holder.getAdapterPosition());
+                                            simpleDialog.dismiss();
+                                        }
+                                    }
+                                });
+                    }
+                });
+
+                simpleHolder.mListItemSimple.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                        builder.setTitle("Confirm")
+                                .setMessage("Please confirm removal of this item")
+                                .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        mToDoItems.remove(holder.getAdapterPosition());
+                                        notifyItemRemoved(holder.getAdapterPosition());
+                                        dialog.dismiss();
+                                    }
+                                })
+                                .setNegativeButton("Cancel", null);
+
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+
+                        return true;
+                    }
+                });
+
                 break;
             case COMPLEX:
                 ItemHolderComplex complexHolder = (ItemHolderComplex) holder;
@@ -79,14 +145,12 @@ public class ItemRecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 });
                 break;
             default:
-                simpleHolder = (ItemHolderSimple) holder;
+                ItemHolderSimple simpleDefaultHolder = (ItemHolderSimple) holder;
                 SimpleToDoItem simpleDefaultItem = ((SimpleToDoItem)mToDoItems.get(position));
 
-                simpleHolder.mCheckBox.setChecked(simpleDefaultItem.isChecked());
-                simpleHolder.mItemTitle.setText(simpleDefaultItem.getItemTitle());
+                simpleDefaultHolder.mCheckBox.setChecked(simpleDefaultItem.isChecked());
+                simpleDefaultHolder.mItemTitle.setText(simpleDefaultItem.getItemTitle());
         }
-
-
     }
 
     @Override

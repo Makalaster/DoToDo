@@ -53,7 +53,7 @@ public class ToDoListRecyclerViewAdapter extends RecyclerView.Adapter<ToDoListHo
             public boolean onLongClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
                 builder.setTitle("Confirm")
-                        .setMessage("Please confirm removal of this item")
+                        .setMessage("Please confirm removal of this list")
                         .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

@@ -26,10 +26,6 @@ public class ListBook {
         mToDoLists.add(list);
     }
 
-    public void removeList(int removeList) {
-        mToDoLists.remove(removeList);
-    }
-
     public ArrayList<ToDoList> getLists() {
         return mToDoLists;
     }

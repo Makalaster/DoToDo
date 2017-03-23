@@ -50,13 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
                 builder.setMessage("Enter the list title:").setTitle("Add a new list")
                         .setPositiveButton("Done", null)
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Toast toast = Toast.makeText(MainActivity.this, "You chose Cancel!", Toast.LENGTH_SHORT);
-                                toast.show();
-                            }
-                        });
+                        .setNegativeButton("Cancel", null);
 
                 final AlertDialog dialog = builder.create();
                 dialog.show();
