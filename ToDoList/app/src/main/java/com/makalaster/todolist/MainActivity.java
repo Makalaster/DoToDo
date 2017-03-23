@@ -102,7 +102,6 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
             // Make sure the request was successful...
             if (resultCode == RESULT_OK) {
                 if (data.getBooleanExtra("SIZE_CHANGED", false)) {
-                    Log.d(TAG, "onActivityResult: " + data.getIntExtra("POSITION", 0));
                     mAdapter.notifyItemChanged(data.getIntExtra("POSITION", 0));
                 }
             }
