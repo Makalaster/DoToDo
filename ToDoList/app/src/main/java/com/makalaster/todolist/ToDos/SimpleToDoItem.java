@@ -1,12 +1,14 @@
 package com.makalaster.todolist.ToDos;
 
+import android.graphics.Color;
+
 /**
  * Created by Makalaster on 3/22/17.
  */
 
 public class SimpleToDoItem implements ToDoItem{
     private String mItemTitle;
-    private boolean isChecked;
+    private boolean mIsChecked;
 
     public SimpleToDoItem(String itemTitle) {
         mItemTitle = itemTitle;
@@ -21,10 +23,10 @@ public class SimpleToDoItem implements ToDoItem{
     }
 
     public boolean isChecked() {
-        return isChecked;
+        return mIsChecked;
     }
 
     public void setChecked(boolean checked) {
-        isChecked = checked;
+        mIsChecked = checked;
     }
 }

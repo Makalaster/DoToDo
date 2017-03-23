@@ -1,12 +1,14 @@
 package com.makalaster.todolist.Helpers.ListHelpers;
 
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.makalaster.todolist.Helpers.MainHelpers.OnItemClickListener;
 import com.makalaster.todolist.Helpers.MainHelpers.ToDoListHolder;
@@ -55,6 +57,11 @@ public class ItemRecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
                 simpleHolder.mCheckBox.setChecked(simpleItem.isChecked());
                 simpleHolder.mItemTitle.setText(simpleItem.getItemTitle());
+                if (simpleItem.isChecked()) {
+                    simpleHolder.mItemTitle.setTextColor(simpleHolder.mItemTitle.getResources().getColor(R.color.textColorLight));
+                } else {
+                    simpleHolder.mItemTitle.setTextColor(simpleHolder.mItemTitle.getResources().getColor(R.color.textColor));
+                }
 
                 simpleHolder.mCheckBox.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -135,6 +142,14 @@ public class ItemRecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 complexHolder.mCheckBox.setChecked(complexItem.isChecked());
                 complexHolder.mItemTitle.setText(complexItem.getItemTitle());
                 complexHolder.mItemDescription.setText(complexItem.getItemDescription());
+
+                if (complexItem.isChecked()) {
+                    complexHolder.mItemTitle.setTextColor(complexHolder.mItemTitle.getResources().getColor(R.color.textColorLight));
+                    complexHolder.mItemDescription.setTextColor(complexHolder.mItemDescription.getResources().getColor(R.color.textColorLight));
+                } else {
+                    complexHolder.mItemTitle.setTextColor(complexHolder.mItemTitle.getResources().getColor(R.color.textColor));
+                    complexHolder.mItemDescription.setTextColor(complexHolder.mItemDescription.getResources().getColor(R.color.textColor));
+                }
 
                 complexHolder.mCheckBox.setOnClickListener(new View.OnClickListener() {
                     @Override

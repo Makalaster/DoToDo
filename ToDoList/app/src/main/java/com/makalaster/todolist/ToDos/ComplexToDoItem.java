@@ -1,5 +1,7 @@
 package com.makalaster.todolist.ToDos;
 
+import android.graphics.Color;
+
 /**
  * Created by Makalaster on 3/22/17.
  */
@@ -36,4 +38,5 @@ public class ComplexToDoItem implements ToDoItem {
     public void setChecked(boolean checked) {
         mIsChecked = checked;
     }
+
 }

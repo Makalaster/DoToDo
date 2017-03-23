@@ -22,7 +22,8 @@ public class ListActivity extends AppCompatActivity {
     private RecyclerView mItemRecycler;
     private RecyclerView.LayoutManager mLayoutManager;
     private RecyclerView.Adapter mAdapter;
-    private boolean mComplex;
+    private boolean mComplex, mSizeChanged;
+    private int mPos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +31,11 @@ public class ListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list);
 
         mComplex = true;
+        mSizeChanged = false;
 
         Intent openedItem = getIntent();
-        int pos = openedItem.getIntExtra("LIST", 0);
-        mOpenedList = ListBook.getInstance().getLists().get(pos);
+        mPos = openedItem.getIntExtra("LIST", 0);
+        mOpenedList = ListBook.getInstance().getLists().get(mPos);
 
         mItemRecycler = (RecyclerView) findViewById(R.id.item_recycler);
         mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -73,9 +75,11 @@ public class ListActivity extends AppCompatActivity {
                             } else if (newItemBody.getText().length() == 0){
                                 mOpenedList.addItem(new SimpleToDoItem(newItemTitle.getText().toString()));
                                 dialog.dismiss();
+                                mSizeChanged = true;
                             } else {
                                 mOpenedList.addItem(new ComplexToDoItem(newItemTitle.getText().toString(), newItemBody.getText().toString()));
                                 dialog.dismiss();
+                                mSizeChanged = true;
                             }
                             }
                         });
@@ -98,5 +102,15 @@ public class ListActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra("SIZE_CHANGED", mSizeChanged);
+        resultIntent.putExtra("POSITION", mPos);
+
+        setResult(RESULT_OK, resultIntent);
+        finish();
     }
 }

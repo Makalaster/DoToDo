@@ -93,4 +93,16 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         openList.putExtra("LIST", position);
         startActivityForResult(openList, 20);
     }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Check what request we're responding to...
+        if (requestCode == NAME_REQUEST) {
+            // Make sure the request was successful...
+            if (resultCode == RESULT_OK) {
+                if (data.getBooleanExtra("SIZE_CHANGED", false)) {
+                    mAdapter.notifyItemChanged(data.getIntExtra("POSITION", 0));
+                }
+            }
+        }
+    }
 }

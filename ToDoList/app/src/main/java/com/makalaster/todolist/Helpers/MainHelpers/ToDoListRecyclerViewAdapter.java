@@ -70,8 +70,6 @@ public class ToDoListRecyclerViewAdapter extends RecyclerView.Adapter<ToDoListHo
                 return true;
             }
         });
-
-
     }
 
     @Override
