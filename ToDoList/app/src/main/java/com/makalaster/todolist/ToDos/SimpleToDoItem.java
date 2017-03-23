@@ -6,6 +6,7 @@ package com.makalaster.todolist.ToDos;
 
 public class SimpleToDoItem implements ToDoItem{
     private String mItemTitle;
+    private boolean isChecked;
 
     public SimpleToDoItem(String itemTitle) {
         mItemTitle = itemTitle;
@@ -17,5 +18,13 @@ public class SimpleToDoItem implements ToDoItem{
 
     public void setItemTitle(String itemTitle) {
         mItemTitle = itemTitle;
+    }
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
     }
 }

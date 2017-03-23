@@ -22,11 +22,14 @@ public class ListActivity extends AppCompatActivity {
     private RecyclerView mItemRecycler;
     private RecyclerView.LayoutManager mLayoutManager;
     private RecyclerView.Adapter mAdapter;
+    private boolean mComplex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
+
+        mComplex = true;
 
         Intent openedItem = getIntent();
         int pos = openedItem.getIntExtra("LIST", 0);
@@ -50,8 +53,7 @@ public class ListActivity extends AppCompatActivity {
                 builder.setView(newItemView);
 
                 final EditText newItemTitle = (EditText) newItemView.findViewById(R.id.new_item_title);
-                newItemTitle.setError("Please enter an item title");
-                newItemTitle.requestFocus();
+
                 final EditText newItemBody = (EditText) newItemView.findViewById(R.id.new_item_body);
 
                 builder.setTitle("Create a new list item")
@@ -64,14 +66,36 @@ public class ListActivity extends AppCompatActivity {
                         .setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                if (newItemBody.getText().length() == 0) {
-                                    mOpenedList.addItem(new SimpleToDoItem(newItemTitle.getText().toString()));
-                                } else {
-                                    mOpenedList.addItem(new ComplexToDoItem(newItemTitle.getText().toString(), newItemBody.getText().toString()));
-                                }
+
+                            if (newItemTitle.getText().toString().isEmpty()) {
+                                newItemTitle.setError("Please enter an item title");
+                                newItemTitle.requestFocus();
+                            } else if (newItemBody.getText().length() == 0){
+                                mOpenedList.addItem(new SimpleToDoItem(newItemTitle.getText().toString()));
+                                dialog.dismiss();
+                            } else {
+                                mOpenedList.addItem(new ComplexToDoItem(newItemTitle.getText().toString(), newItemBody.getText().toString()));
                                 dialog.dismiss();
                             }
+                            }
                         });
+            }
+        });
+
+        fab.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+
+                if (mComplex) {
+                    mOpenedList.addItem(new SimpleToDoItem("QUICKTITLE"));
+                    mComplex = !mComplex;
+                    mAdapter.notifyItemInserted(mOpenedList.getToDoItems().size() - 1);
+                } else {
+                    mOpenedList.addItem(new ComplexToDoItem("QUICKTITLE", "QUICKDESCRIPTION"));
+                    mComplex = !mComplex;
+                    mAdapter.notifyItemInserted(mOpenedList.getToDoItems().size() - 1);
+                }
+                return true;
             }
         });
     }

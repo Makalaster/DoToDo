@@ -6,6 +6,7 @@ package com.makalaster.todolist.ToDos;
 
 public class ComplexToDoItem implements ToDoItem {
     private String mItemTitle, mItemDescription;
+    private boolean mIsChecked;
 
     public ComplexToDoItem(String itemTitle, String itemDescription) {
         mItemTitle = itemTitle;
@@ -26,5 +27,13 @@ public class ComplexToDoItem implements ToDoItem {
 
     public void setItemDescription(String itemDescription) {
         mItemDescription = itemDescription;
+    }
+
+    public boolean isChecked() {
+        return mIsChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        mIsChecked = checked;
     }
 }

@@ -1,6 +1,7 @@
 package com.makalaster.todolist;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -46,8 +47,6 @@ public class MainActivity extends AppCompatActivity {
                 builder.setView(editView);
 
                 final EditText newListName = (EditText) editView.findViewById(R.id.new_list_title);
-                newListName.setError("Please enter a list name");
-                newListName.requestFocus();
 
                 builder.setMessage("Enter the list title:").setTitle("Add a new list")
                         .setPositiveButton("Done", null)
@@ -66,11 +65,29 @@ public class MainActivity extends AppCompatActivity {
                         .setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                ListBook listBook = ListBook.getInstance();
-                                listBook.addList(new ToDoList(newListName.getText().toString()));
-                            dialog.dismiss();
+                                if (newListName.getText().toString().isEmpty()) {
+                                    newListName.setError("Please enter a list name");
+                                    newListName.requestFocus();
+                                } else {
+                                    ListBook listBook = ListBook.getInstance();
+                                    listBook.addList(new ToDoList(newListName.getText().toString()));
+                                    dialog.dismiss();
+                                    Intent openList = new Intent(MainActivity.this, ListActivity.class);
+                                    openList.putExtra("LIST", listBook.getLists().size() - 1);
+                                    startActivity(openList);
+                                }
                             }
                         });
+            }
+        });
+
+        fab.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                ListBook listBook = ListBook.getInstance();
+                listBook.addList(new ToDoList("QUICKLIST"));
+                mAdapter.notifyItemInserted(listBook.getLists().size() - 1);
+                return true;
             }
         });
     }
