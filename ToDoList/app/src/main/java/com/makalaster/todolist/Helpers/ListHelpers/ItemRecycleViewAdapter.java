@@ -26,10 +26,12 @@ import java.util.ArrayList;
 
 public class ItemRecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private ArrayList<ToDoItem> mToDoItems;
+    private OnItemRemoved mOnItemRemoved;
     private final int SIMPLE = 0, COMPLEX = 1;
 
-    public ItemRecycleViewAdapter(ArrayList<ToDoItem> toDoItems) {
+    public ItemRecycleViewAdapter(ArrayList<ToDoItem> toDoItems, OnItemRemoved removed) {
         mToDoItems = toDoItems;
+        mOnItemRemoved = removed;
     }
 
     @Override
@@ -122,6 +124,7 @@ public class ItemRecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                                     public void onClick(DialogInterface dialog, int which) {
                                         mToDoItems.remove(holder.getAdapterPosition());
                                         notifyItemRemoved(holder.getAdapterPosition());
+                                        mOnItemRemoved.onItemRemoved();
                                         dialog.dismiss();
                                     }
                                 })
@@ -216,6 +219,7 @@ public class ItemRecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                                     public void onClick(DialogInterface dialog, int which) {
                                         mToDoItems.remove(holder.getAdapterPosition());
                                         notifyItemRemoved(holder.getAdapterPosition());
+                                        mOnItemRemoved.onItemRemoved();
                                         dialog.dismiss();
                                     }
                                 })

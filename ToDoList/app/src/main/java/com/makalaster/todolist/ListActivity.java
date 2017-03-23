@@ -12,12 +12,13 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.makalaster.todolist.Helpers.ListHelpers.ItemRecycleViewAdapter;
+import com.makalaster.todolist.Helpers.ListHelpers.OnItemRemoved;
 import com.makalaster.todolist.ToDos.ComplexToDoItem;
 import com.makalaster.todolist.ToDos.ListBook;
 import com.makalaster.todolist.ToDos.SimpleToDoItem;
 import com.makalaster.todolist.ToDos.ToDoList;
 
-public class ListActivity extends AppCompatActivity {
+public class ListActivity extends AppCompatActivity implements OnItemRemoved {
     private ToDoList mOpenedList;
     private RecyclerView mItemRecycler;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -40,7 +41,7 @@ public class ListActivity extends AppCompatActivity {
         mItemRecycler = (RecyclerView) findViewById(R.id.item_recycler);
         mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mItemRecycler.setLayoutManager(mLayoutManager);
-        mAdapter = new ItemRecycleViewAdapter(mOpenedList.getToDoItems());
+        mAdapter = new ItemRecycleViewAdapter(mOpenedList.getToDoItems(), this);
         mItemRecycler.setAdapter(mAdapter);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_todo);
@@ -93,10 +94,12 @@ public class ListActivity extends AppCompatActivity {
                 if (mComplex) {
                     mOpenedList.addItem(new SimpleToDoItem("QUICKTITLE"));
                     mComplex = !mComplex;
+                    mSizeChanged = true;
                     mAdapter.notifyItemInserted(mOpenedList.getToDoItems().size() - 1);
                 } else {
                     mOpenedList.addItem(new ComplexToDoItem("QUICKTITLE", "QUICKDESCRIPTION"));
                     mComplex = !mComplex;
+                    mSizeChanged = true;
                     mAdapter.notifyItemInserted(mOpenedList.getToDoItems().size() - 1);
                 }
                 return true;
@@ -112,5 +115,10 @@ public class ListActivity extends AppCompatActivity {
 
         setResult(RESULT_OK, resultIntent);
         finish();
+    }
+
+    @Override
+    public void onItemRemoved() {
+        mSizeChanged = true;
     }
 }

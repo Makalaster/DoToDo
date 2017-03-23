@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     private RecyclerView mListRecycler;
     private RecyclerView.LayoutManager mLayoutManager;
     private RecyclerView.Adapter mAdapter;
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
             // Make sure the request was successful...
             if (resultCode == RESULT_OK) {
                 if (data.getBooleanExtra("SIZE_CHANGED", false)) {
+                    Log.d(TAG, "onActivityResult: " + data.getIntExtra("POSITION", 0));
                     mAdapter.notifyItemChanged(data.getIntExtra("POSITION", 0));
                 }
             }
