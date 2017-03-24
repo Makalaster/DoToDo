@@ -25,5 +25,5 @@ The app created for this project is a simple to-do list utility. The user can ad
   <img src="screenshots/screenshot2.jpg" width="250">
   <img src="screenshots/screenshot3.jpg" width="250">
   <img src="screenshots/screenshot4.jpg" width="250">
-  <img src="screenshots/screenshot5.jpg" width="250">
+  <img src="screenshots/screenshot.jpg" width="250">
 </p>
