@@ -113,4 +113,11 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
             }
         }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        mAdapter.notifyDataSetChanged();
+    }
 }

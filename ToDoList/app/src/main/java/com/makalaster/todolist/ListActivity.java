@@ -129,4 +129,5 @@ public class ListActivity extends AppCompatActivity implements OnItemRemoved {
     public void onItemRemoved() {
         mSizeChanged = true;
     }
+
 }
