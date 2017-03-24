@@ -21,8 +21,9 @@ The app created for this project is a simple to-do list utility. The user can ad
 #### ScreenShots
 
 <p align="center">
-  <img src="screenshots/screenshot1.png" width="250">
-  <img src="screenshots/screenshot2.png" width="250">
-  <img src="screenshots/screenshot3.png" width="250">
-  <img src="screenshots/screenshot4.png" width="250">
+  <img src="screenshots/screenshot1.jpg" width="250">
+  <img src="screenshots/screenshot2.jpg" width="250">
+  <img src="screenshots/screenshot3.jpg" width="250">
+  <img src="screenshots/screenshot4.jpg" width="250">
+  <img src="screenshots/screenshot5.jpg" width="250">
 </p>
