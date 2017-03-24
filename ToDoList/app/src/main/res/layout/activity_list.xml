@@ -7,8 +7,19 @@
     android:layout_height="match_parent"
     tools:context="com.makalaster.todolist.ListActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/list_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/AppTheme"
+        app:titleTextColor="@color/textColorLight"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/item_recycler"
+        android:layout_below="@id/list_toolbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

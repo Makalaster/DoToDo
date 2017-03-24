@@ -1,5 +1,6 @@
 package com.makalaster.todolist;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
@@ -7,9 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.makalaster.todolist.Helpers.ListHelpers.ItemRecycleViewAdapter;
 import com.makalaster.todolist.Helpers.ListHelpers.OnItemRemoved;
@@ -37,6 +40,11 @@ public class ListActivity extends AppCompatActivity implements OnItemRemoved {
         Intent openedItem = getIntent();
         mPos = openedItem.getIntExtra("LIST", 0);
         mOpenedList = ListBook.getInstance().getLists().get(mPos);
+
+        String title = mOpenedList.getName();
+        Toolbar listToolbar = (Toolbar) findViewById(R.id.list_toolbar);
+        setSupportActionBar(listToolbar);
+        getSupportActionBar().setTitle(title);
 
         mItemRecycler = (RecyclerView) findViewById(R.id.item_recycler);
         mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
