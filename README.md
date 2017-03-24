@@ -6,23 +6,11 @@ The app created for this project is a simple to-do list utility. The user can ad
 
 ---
 
-#### Requirements
+#### Functionality
 
-Your app must:
 
-- **Display a collection of to-do lists**
-- **Display items on each to-do list, including descriptions**
-- Allow the user to **create a new to-do list**
-- Allow the user to **Add items** to each to-do list
-- Allow the user to **remove items from a to-do list**
-- Allow the user to **remove an entire to-do list**
-- Use two custom Java classes to contain your data for each `ToDoList`, and the `ToDoItem`s in each `ToDoList`
-- Show an error message if invalid input is given (e.g. blank input)
-- Persist data (your `ToDoList`s) while the app is open using a **singleton**
-- Use either `ListView` or `RecyclerView` to show your `ToDoList`s and `ToDoItem`s. We recommend `RecyclerView`, but will accept `ListView` for this project.
-- Display correctly in both landscape and portrait orientations
 
-**Bonus:**
+#### Known Bugs
 
 - Allow the user to check off completed items
 - Allow the user to edit previously added items
@@ -30,18 +18,7 @@ Your app must:
 
 ---
 
-#### Necessary Deliverables
-
-- A **git repository hosted on GitHub**, with frequent commits dating back to the **very beginning** of the project. Commit early, commit often.
-- **A ``readme.md`` file** describing what the app does, and any bugs that may exist
-- At least one screenshot of your home screen in the `readme.md`
-- Pictures of your prototypes in the git repository
-
----
-
-#### Example Deliverable
-
-Below you can find an example of what the instructors' final product looks like. **Be creative with your own designs!**
+#### ScreenShots
 
 <p align="center">
   <img src="screenshots/screenshot1.png" width="250">
