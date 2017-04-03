@@ -7,12 +7,14 @@ import android.graphics.Color;
  */
 
 public class ComplexToDoItem implements ToDoItem {
+    private int mId;
     private String mItemTitle, mItemDescription;
     private boolean mIsChecked;
 
-    public ComplexToDoItem(String itemTitle, String itemDescription) {
+    public ComplexToDoItem(int id, String itemTitle, String itemDescription) {
         mItemTitle = itemTitle;
         mItemDescription = itemDescription;
+        mId = id;
     }
 
     public String getItemTitle() {
@@ -39,4 +41,7 @@ public class ComplexToDoItem implements ToDoItem {
         mIsChecked = checked;
     }
 
+    public int getId() {
+        return mId;
+    }
 }

@@ -7,11 +7,13 @@ import android.graphics.Color;
  */
 
 public class SimpleToDoItem implements ToDoItem{
+    private int mId;
     private String mItemTitle;
     private boolean mIsChecked;
 
-    public SimpleToDoItem(String itemTitle) {
+    public SimpleToDoItem(int id, String itemTitle) {
         mItemTitle = itemTitle;
+        mId = id;
     }
 
     public String getItemTitle() {
@@ -28,5 +30,9 @@ public class SimpleToDoItem implements ToDoItem{
 
     public void setChecked(boolean checked) {
         mIsChecked = checked;
+    }
+
+    public int getId() {
+        return mId;
     }
 }

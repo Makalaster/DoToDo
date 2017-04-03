@@ -82,11 +82,11 @@ public class ListActivity extends AppCompatActivity implements OnItemRemoved {
                                 newItemTitle.setError("Please enter an item title");
                                 newItemTitle.requestFocus();
                             } else if (newItemBody.getText().length() == 0){
-                                mOpenedList.addItem(new SimpleToDoItem(newItemTitle.getText().toString()));
+                                mOpenedList.addItem(new SimpleToDoItem(0, newItemTitle.getText().toString()));
                                 dialog.dismiss();
                                 mSizeChanged = true;
                             } else {
-                                mOpenedList.addItem(new ComplexToDoItem(newItemTitle.getText().toString(), newItemBody.getText().toString()));
+                                mOpenedList.addItem(new ComplexToDoItem(0, newItemTitle.getText().toString(), newItemBody.getText().toString()));
                                 dialog.dismiss();
                                 mSizeChanged = true;
                             }
@@ -100,12 +100,12 @@ public class ListActivity extends AppCompatActivity implements OnItemRemoved {
             public boolean onLongClick(View v) {
 
                 if (mComplex) {
-                    mOpenedList.addItem(new SimpleToDoItem("QUICKTITLE"));
+                    mOpenedList.addItem(new SimpleToDoItem(0, "QUICKTITLE"));
                     mComplex = !mComplex;
                     mSizeChanged = true;
                     mAdapter.notifyItemInserted(mOpenedList.getToDoItems().size() - 1);
                 } else {
-                    mOpenedList.addItem(new ComplexToDoItem("QUICKTITLE", "QUICKDESCRIPTION"));
+                    mOpenedList.addItem(new ComplexToDoItem(0, "QUICKTITLE", "QUICKDESCRIPTION"));
                     mComplex = !mComplex;
                     mSizeChanged = true;
                     mAdapter.notifyItemInserted(mOpenedList.getToDoItems().size() - 1);
