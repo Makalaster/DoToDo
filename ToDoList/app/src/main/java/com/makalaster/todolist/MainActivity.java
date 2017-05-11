@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         mListRecycler = (RecyclerView) findViewById(R.id.list_recycler);
         mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mListRecycler.setLayoutManager(mLayoutManager);
-        mAdapter = new ToDoListRecyclerViewAdapter(ListBook.getInstance().getLists(), this);
+        mAdapter = new ToDoListRecyclerViewAdapter(ListBook.getInstance(this).getLists(), this);
         mListRecycler.setAdapter(mAdapter);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_main);
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                                     newListName.setError("Please enter a list name");
                                     newListName.requestFocus();
                                 } else {
-                                    ListBook listBook = ListBook.getInstance();
+                                    ListBook listBook = ListBook.getInstance(MainActivity.this);
                                     listBook.addList(new ToDoList(newListName.getText().toString()));
                                     dialog.dismiss();
                                     Intent openList = new Intent(MainActivity.this, ListActivity.class);
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         fab.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                ListBook listBook = ListBook.getInstance();
+                ListBook listBook = ListBook.getInstance(MainActivity.this);
                 listBook.addList(new ToDoList("QUICKLIST"));
                 mAdapter.notifyItemInserted(listBook.getLists().size() - 1);
                 return true;

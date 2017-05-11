@@ -7,6 +7,7 @@ import java.util.ArrayList;
  */
 
 public class ToDoList {
+    private int mId;
     private String mName;
     private ArrayList<ToDoItem> mToDoItems;
 
